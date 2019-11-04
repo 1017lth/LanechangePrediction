@@ -9,17 +9,13 @@ from sklearn.ensemble import GradientBoostingClassifier
 from sklearn.ensemble import RandomForestClassifier
 
 #Read CSV File
-filename_LCP = "dataset10.csv"
-df_LCP = pd.read_csv(filename_LCP)
-
-print(df_LCP.shape)
-print(df_LCP.head())
-
 #Data Frame Split x value, y value and train data:70% test data :30% classification
 
-df = df_LCP.values
-X = df[:,:6]
-y = df[:,7]
+filename_LCP = "dataset11.csv"
+df_LCP = pd.read_csv(filename_LCP)
+df = pd.DataFrame(df_LCP)
+X = df.drop('Lanemarker',axis=1)
+y = df['Lanemarker'].astype(np.int64)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
 
 
@@ -76,10 +72,9 @@ GDB_params = {
     'criterion': ['friedman_mse', 'mse', 'mae']
 }
 df = df_LCP.values
-X = df[:,:6]
-y = df[:,7]
+X = df.drop('Lanemarker',axis=1)
+y = df['Lanemarker'].astype(np.int64)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
-
 
 
 #Correlation with lanemarker
